@@ -16,28 +16,18 @@
 													+ "<button type=\"button\" class=\"close\" data-dismiss=\"alert\"><span aria-hidden=\"true\">&times;</span><span class=\"sr-only\">Close</span></button>"
 													+ "<strong>In progress!</strong> adding employe!."
 													+ "</div>");
-							$scope.method = 'POST';
-							$scope.url = "employe.execute?action=add&employeId="
-									+ this.employeId
-									+ "&firstName="
-									+ this.firstName
-									+ "&lastName="
-									+ this.lastName
-									+ "&experience="
-									+ this.experience;
-							$scope.data = "";
 							$http(
 									{
-										url : $scope.url,
 										headers : {
 											'Content-Type' : 'application/x-www-form-urlencoded'
 										},
 										method : 'POST',
 										url : '../insert.employe',
-										data : '&action=add' + '&employeId='
+										data : '&employeId='
 												+ this.employeId
 												+ '&firstName='
-												+ this.firstName + '&lastName='
+												+ this.firstName
+												+ '&lastName='
 												+ this.lastName
 												+ '&experience='
 												+ this.experience
@@ -57,7 +47,40 @@
 
 						};
 					});
-	employeController.controller('EditEmployeCtrl', function() {
-		alert('I\'m your edit employe angular controller');
+	employeController.controller('EditEmployeCtrl', function($scope, $http, $templateCache) {
+		this.employeId = "";
+		this.firstName = "";
+		this.lastName = "";
+		this.experience = "";
+		this.SubmitFormIfValid = function() {
+			this.employeId = $('#employeId').val();
+			this.firstName = $('#firstName').val();
+			this.lastName = $('#lastName').val();
+			this.experience = $('#experience').val();
+			alert('I\'m your edit employe angular controller');
+			$http(
+					{
+						headers : {
+							'Content-Type' : 'application/x-www-form-urlencoded'
+						},
+						method : 'POST',
+						url : '../update.employe',
+						data : '&employeId='
+								+ this.employeId
+								+ '&firstName='
+								+ this.firstName 
+								+ '&lastName='
+								+ this.lastName
+								+ '&experience='
+								+ this.experience
+					})
+					.success(
+							function(response) {
+								refreshEmployeTable(response);
+							}).error(function(response) {
+						alert('erreur insertion');
+					});
+
+		};
 	});
 })();
