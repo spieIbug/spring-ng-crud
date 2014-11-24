@@ -18,6 +18,16 @@
 				$( this ).addClass( "done" );
 			});
 	}
+	
+	function getCurrentEmployeValues(employeId){
+		$.ajax({
+			  url: "../get.employe?employeId="+employeId,
+			  context: document.body
+			}).done(function(data) {
+				fillFormData(data);
+				$( this ).addClass( "done" );
+			});
+	}
 	/**
 	 * This function refresh the list of employes
 	 */
@@ -39,10 +49,23 @@
 	        };
 	        newEmployeList = newEmployeList + "<td>" +
 			"<button type=\"submit\" id=\"delete"+currEmployeId+"\" data-loading-text=\"deleting...\" class=\"btn btn-danger\" autocomplete=\"off\" onclick=\"javascript: employeId = "+currEmployeId+";\" value=\""+currEmployeId+"\" data-toggle=\"modal\" data-target=\"#confirm-delete\">Delete</button>"+
-			"</td>"+
-			"<td>"+currEmployeId+"</td>";
-	        newEmployeList = newEmployeList + "</tr>";
+			"</td>";
+			newEmployeList = newEmployeList + "<td>" +
+	        "<button type=\"submit\" id=\"update"+currEmployeId+"\" data-loading-text=\"updating...\" class=\"btn btn-info\" autocomplete=\"off\" onclick=\"getCurrentEmployeValues("+currEmployeId+")\" value=\""+currEmployeId+"\" data-toggle=\"modal\" data-target=\"#modal-edit-window\">Edit</button>"+
+	        "</td>"; 
+	        newEmployeList = newEmployeList + "</tr>";  
 		};
 		newEmployeList = newEmployeList + "</table>";
 		$('#listEmploye').html(newEmployeList);
+	}
+	
+	
+	/**
+	 * This function fill form Data
+	 */
+	function fillFormData(data){
+		$('#employeId').val(data['employeId']);
+		$('#firstName').val(data['firstName']);
+		$('#lastName').val(data['lastName']);
+		$('#experience').val(data['experience']);		
 	}
