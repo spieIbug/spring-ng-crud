@@ -1,4 +1,4 @@
-<table width="100%">
+<table width="100%" id="listEmploye">
 	<th>EMPLOYE ID</th>
 	<th>FIRST NAME</th>
 	<th>LAST NAME</th>
@@ -9,19 +9,27 @@
 		<td>{{employe.lastName}}</td>
 		<td>{{employe.experience}}</td>
 		<td>
-			<button type="submit" id="delete{{employe.employeId}}" data-loading-text="deleting..." class="btn btn-danger" autocomplete="off" onclick="prepareDataForEmployeDeleting(this.value)" value="{{employe.employeId}}">Delete</button>
+			<button type="submit" id="delete{{employe.employeId}}" data-loading-text="deleting..." class="btn btn-danger" autocomplete="off" onclick="javascript: employeId = this.value;" value="{{employe.employeId}}" data-toggle="modal" data-target="#confirm-delete">Delete</button>
 		</td>
 		<td>{{employe.employeId}}</td>
 	</tr>
 </table>
 
-<script>
-	function prepareDataForEmployeDeleting(employeId){
-		$.ajax({
-			  url: "../delete.employe?employeId="+employeId,
-			  context: document.body
-			}).done(function() {
-			  $( this ).addClass( "done" );
-			});
-	}
-</script>
+<div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">Confirm Delete</h4>
+                </div>
+                <div class="modal-body">
+                    <p>You are about to delete one employe, this procedure is irreversible.</p>
+                    <p>Do you want to proceed?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-danger danger" onclick=deleteEmploye(employeId)  data-dismiss="modal">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div><!-- End of confirmation modal dialog -->
