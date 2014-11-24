@@ -9,27 +9,133 @@
 		<td>{{employe.lastName}}</td>
 		<td>{{employe.experience}}</td>
 		<td>
-			<button type="submit" id="delete{{employe.employeId}}" data-loading-text="deleting..." class="btn btn-danger" autocomplete="off" onclick="javascript: employeId = this.value;" value="{{employe.employeId}}" data-toggle="modal" data-target="#confirm-delete">Delete</button>
+			<button type="submit" id="delete{{employe.employeId}}"
+				data-loading-text="deleting..." class="btn btn-danger"
+				autocomplete="off" onclick="javascript: employeId = this.value;"
+				value="{{employe.employeId}}" data-toggle="modal"
+				data-target="#confirm-delete">Delete</button>
 		</td>
-		<td>{{employe.employeId}}</td>
+		<td><button type="submit" id="update{{employe.employeId}}"
+				data-loading-text="updating..." class="btn btn-info"
+				autocomplete="off" onclick="getCurrentEmployeValues(this.value)"
+				value="{{employe.employeId}}" data-toggle="modal"
+				data-target="#modal-edit-window">Edit</button></td>
 	</tr>
 </table>
 
-<div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title" id="myModalLabel">Confirm Delete</h4>
-                </div>
-                <div class="modal-body">
-                    <p>You are about to delete one employe, this procedure is irreversible.</p>
-                    <p>Do you want to proceed?</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-danger danger" onclick=deleteEmploye(employeId)  data-dismiss="modal">Delete</button>
-                </div>
-            </div>
-        </div>
-    </div><!-- End of confirmation modal dialog -->
+<div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog"
+	aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">Confirm Delete</h4>
+			</div>
+			<div class="modal-body">
+				<p>You are about to delete one employe, this procedure is
+					irreversible.</p>
+				<p>Do you want to proceed?</p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+				<button type="button" class="btn btn-danger danger"
+					onclick=deleteEmploye(employeId) data-dismiss="modal">Delete</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- End of confirmation modal dialog -->
+
+<div class="modal fade" id="modal-edit-window" tabindex="-1"
+	role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">Employe edition</h4>
+			</div>
+			<div class="modal-body">
+				<form method="POST" class="form-inline" role="form"
+					name="editEmploye"
+					ng-controller="EditEmployeCtrl as editEmployeCtrl"
+					ng-submit="editEmploye.$valid && editEmployeCtrl.SubmitFormIfValid()"
+					novalidate>
+					<table width="100%">
+						<tr>
+							<td>
+								<div class="form-group">
+									<div class="input-group">
+										<div class="input-group-addon">Employe ID :</div>
+										<input name="employeId" id="employeId"
+											ng-model="editEmployeCtrl.employeId" ng-pattern="/^[0-9]*$/" />
+									</div>
+									<p
+										ng-show="editEmploye.employeId.$invalid && editEmploye.employeId.$dirty"
+										class="text-danger">Please fill a valid numeric employe
+										ID!</p>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<div class="form-group">
+									<div class="input-group">
+										<div class="input-group-addon">First Name :</div>
+										<input name="firstName" id="firstName"
+											ng-model="editEmployeCtrl.firstName"
+											ng-pattern="/^([A-Z]+\s)*[A-Z]+$/" />
+									</div>
+									<p
+										ng-show="editEmploye.firstName.$invalid && editEmploye.firstName.$dirty"
+										class="text-danger">Please fill a valid employe name
+										(upper case)!</p>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<div class="form-group">
+									<div class="input-group">
+										<div class="input-group-addon">Last Name :</div>
+										<input name="lastName" id="lastName"
+											ng-model="editEmployeCtrl.lastName"
+											ng-pattern="/^([a-zA-Z]+\s)*[a-zA-Z]+$/" />
+									</div>
+									<p
+										ng-show="editEmploye.lastName.$invalid && editEmploye.lastName.$dirty"
+										class="text-danger">Please fill a valid employe last name!</p>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<div class="form-group">
+									<div class="input-group">
+										<div class="input-group-addon">Experience :</div>
+										<input name="experience" id="experience"
+											ng-model="editEmployeCtrl.experience" ng-pattern="/^[0-9]*$/" />
+									</div>
+									<p
+										ng-show="editEmploye.experience.$invalid && editEmploye.experience.$dirty"
+										class="text-danger">This is not a numeric value!</p>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<button type="submit" name="action" class="btn btn-primary"
+									value="update">update</button>
+							</td>
+						</tr>
+					</table>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- End of edition modal dialog -->
