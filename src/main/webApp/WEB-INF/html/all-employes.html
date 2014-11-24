@@ -8,5 +8,21 @@
 		<td>{{employe.firstName}}</td>
 		<td>{{employe.lastName}}</td>
 		<td>{{employe.experience}}</td>
+		<td>
+			<button type="submit" id="delete{{employe.employeId}}" data-loading-text="deleting..." class="btn btn-danger" autocomplete="off" onclick="prepareDataForEmployeDeleting(this.value)" value="{{employe.employeId}}">Delete</button>
+		</td>
+		<td>{{employe.employeId}}</td>
 	</tr>
 </table>
+
+<script>
+	function prepareDataForEmployeDeleting(employeId){
+		$.ajax({
+				
+			  url: "test.html",
+			  context: document.body
+			}).done(function() {
+			  $( this ).addClass( "done" );
+			});
+	}
+</script>

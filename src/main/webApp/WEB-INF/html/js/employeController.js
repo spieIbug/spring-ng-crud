@@ -3,10 +3,7 @@
  */
 (function() {
 	var employeController = angular.module('employeController', []);
-	employeController
-			.controller(
-					'NewEmployeCtrl',
-					function($scope, $http, $templateCache) {
+	employeController.controller('NewEmployeCtrl', function($scope, $http, $templateCache) {
 						this.employeId = "";
 						this.firstName = "";
 						this.lastName = "";
@@ -61,8 +58,5 @@
 					});
 	employeController.controller('EditEmployeCtrl', function() {
 		alert('I\'m your edit employe angular controller');
-	});
-	employeController.controller('DeleteEmployeCtrl', function() {
-		alert('I\'m your delete employe angular controller');
 	});
 })();
