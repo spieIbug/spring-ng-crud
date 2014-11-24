@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html ng-app="tuto">
+<head>
+<meta charset="ISO-8859-1">
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="css/bootstrap-theme.min.css">
+<script src="js/jquery-1.11.1.js"></script>
+<script src="js/angular.js"></script>
+<script src="js/angular-route.js"></script>
+<script src="js/TechnoSofteamCRUDTuto.js"></script>
+<script src="js/employeController.js"></script>
+<script src="js/employeDirectives.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<title>Employ&eacute;es Management Tutorial</title>
+</head>
+<body>
+	<nav class="navbar navbar-default" role="navigation">
+		<div class="container-fluid">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed"
+					data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#">TechnoSofTeam</a>
+			</div>
+
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse"
+				id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav">
+					<li class="dropdown"><a href="#" class="dropdown-toggle"
+						data-toggle="dropdown" role="button" aria-expanded="false">Employes
+							<span class="caret"></span>
+					</a>
+						<ul class="dropdown-menu" role="menu">
+							<li><a href="../employe">CRUD via JSP</a></li>
+							<li><a href="#newEmploye">new using Angular</a></li>
+							<li><a href="#editEmploye">update using Angular</a></li>
+							<li><a href="#deleteEmploye">delete using Angular</a></li>
+						</ul></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	<div ng-view class="view-frame">
+		<!-- All your web parts will be includer here -->
+	</div>
+	<!-- Angular list employes directive call -->
+	<all-employes></all-employes>
+</body>
+</html>
