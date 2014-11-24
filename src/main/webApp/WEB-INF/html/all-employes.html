@@ -1,0 +1,12 @@
+<table width="100%">
+	<th>EMPLOYE ID</th>
+	<th>FIRST NAME</th>
+	<th>LAST NAME</th>
+	<th>EXPERIENCE</th>
+	<tr ng-repeat="employe in allEmployesCtrl.list">
+		<td>{{employe.employeId}}</td>
+		<td>{{employe.firstName}}</td>
+		<td>{{employe.lastName}}</td>
+		<td>{{employe.experience}}</td>
+	</tr>
+</table>
