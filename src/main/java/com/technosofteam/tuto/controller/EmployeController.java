@@ -67,6 +67,19 @@ public class EmployeController {
 		return allEmployes;
 	}
 	/**
+	 * This controller method update the passed employe in the database
+	 * @param employe
+	 * @return
+	 */
+	@RequestMapping(value = "/update.employe", method = RequestMethod.POST)
+	public @ResponseBody
+	List<Employe> updateEmploye(@ModelAttribute Employe employe) {
+		employeService.update(employe);
+		// We get employes list
+		List<Employe> allEmployes = (List<Employe>) employeService.getAllEmployes();
+		return allEmployes;
+	}
+	/**
 	 * This controller method delete the passed employe by id in the database
 	 * @param employeId
 	 * @return Employes json list 
@@ -89,6 +102,16 @@ public class EmployeController {
 		List<Employe> allEmployes = (List<Employe>) employeService
 				.getAllEmployes();
 		return allEmployes;
+	}
+	
+	/**
+	 * This controller method RETURN the passed employe by id in the database
+	 * @param employeId
+	 * @return Employes json list 
+	 */
+	@RequestMapping(value="/get.employe", method = RequestMethod.GET)
+	public @ResponseBody Employe getEmploye(@RequestParam int employeId){
+		return employeService.getEmploye(employeId);
 	}
 
 	/**
