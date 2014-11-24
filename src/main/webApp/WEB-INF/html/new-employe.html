@@ -1,0 +1,72 @@
+<h1>New Employe</h1>
+<div id="msg"></div>
+<form method="POST" class="form-inline" role="form" name="newEmploye"
+	ng-controller="NewEmployeCtrl as newEmployeCtrl"
+	ng-submit="newEmploye.$valid && newEmployeCtrl.SubmitFormIfValid()"
+	novalidate>
+	<table width="100%">
+		<tr>
+			<td>
+				<div class="form-group">
+					<div class="input-group">
+						<div class="input-group-addon">Employe ID :</div>
+						<input name="employeId" ng-model="newEmployeCtrl.employeId"
+							ng-pattern="/^[0-9]*$/" />
+					</div>
+					<p
+						ng-show="newEmploye.employeId.$invalid && newEmploye.employeId.$dirty"
+						class="text-danger">Please fill a valid numeric employe ID!</p>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<div class="form-group">
+					<div class="input-group">
+						<div class="input-group-addon">First Name :</div>
+						<input name="firstName" ng-model="newEmployeCtrl.firstName"
+							ng-pattern="/^([A-Z]+\s)*[A-Z]+$/" />
+					</div>
+					<p
+						ng-show="newEmploye.firstName.$invalid && newEmploye.firstName.$dirty"
+						class="text-danger">Please fill a valid employe name (upper
+						case)!</p>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<div class="form-group">
+					<div class="input-group">
+						<div class="input-group-addon">Last Name :</div>
+						<input name="lastName" ng-model="newEmployeCtrl.lastName"
+							ng-pattern="/^([a-zA-Z]+\s)*[a-zA-Z]+$/" />
+					</div>
+					<p
+						ng-show="newEmploye.lastName.$invalid && newEmploye.lastName.$dirty"
+						class="text-danger">Please fill a valid employe last name!</p>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<div class="form-group">
+					<div class="input-group">
+						<div class="input-group-addon">Experience :</div>
+						<input name="experience" ng-model="newEmployeCtrl.experience"
+							ng-pattern="/^[0-9]*$/" />
+					</div>
+					<p
+						ng-show="newEmploye.experience.$invalid && newEmploye.experience.$dirty"
+						class="text-danger">This is not a numeric value!</p>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<button type="submit" name="action" class="btn btn-primary"
+					value="Add">add</button>
+			</td>
+		</tr>
+	</table>
+</form>
