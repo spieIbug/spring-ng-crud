@@ -66,7 +66,18 @@ public class EmployeController {
 		List<Employe> allEmployes = (List<Employe>) employeService.getAllEmployes();
 		return allEmployes;
 	}
-
+	/**
+	 * This controller method delete the passed employe by id in the database
+	 * @param employeId
+	 * @return Employes json list 
+	 */
+	@RequestMapping(value="/delete.employe", method = RequestMethod.GET)
+	public @ResponseBody List<Employe> deleteEmploye(@RequestParam int employeId){
+		employeService.delete(employeId);
+		// We get employes list
+		List<Employe> allEmployes = (List<Employe>) employeService.getAllEmployes();
+		return allEmployes;
+	}
 	/**
 	 * URL call that allows us to list employes in a table associated with angular directive
 	 * @return Employes json list

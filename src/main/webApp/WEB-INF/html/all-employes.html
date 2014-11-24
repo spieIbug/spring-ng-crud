@@ -18,8 +18,7 @@
 <script>
 	function prepareDataForEmployeDeleting(employeId){
 		$.ajax({
-				
-			  url: "test.html",
+			  url: "../delete.employe?employeId="+employeId,
 			  context: document.body
 			}).done(function() {
 			  $( this ).addClass( "done" );
